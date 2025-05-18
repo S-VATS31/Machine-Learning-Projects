@@ -1,6 +1,6 @@
 # Machine Learning Projects Collection
 
-This repository contains a collection of modular neural network projects for experimentation, education, and prototyping. It includes practical models for structured data tasks, transformer components built from scratch, and experiments with positional embeddings.
+This repository contains a collection of modular machine learning projects projects for experimentation, education, and prototyping. It includes practical models for structured data tasks, transformer components built from scratch, and experiments with positional embeddings.
 
 ---
 
