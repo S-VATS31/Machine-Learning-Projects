@@ -1,0 +1,6 @@
+Evaluation Metrics:
+Mean Absolute Error (MAE): 118.2135
+Root Mean Squared Error (RMSE): 143.1930
+R²: 0.6773
+Total parameters: 55351
+Trainable parameters: 55351
