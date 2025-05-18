@@ -19,7 +19,7 @@ A neural network designed to predict house prices based on various input feature
 A pipeline for predicting traffic volume using time-series and categorical features. Includes:
 - `clean_data.py`: Preprocessing and feature engineering.
 - `eval_metrics`: Evaluation functions for model performance.
-- `predictions`: Logic for generating and visualizing predictions.
+- `predictions`: Model predictions on unseen data.
 - `train.py`: Model training script.
 
 ---
@@ -36,7 +36,7 @@ Implements the RoPE mechanism, useful for Transformer architectures where relati
 ### ⚙️ Transformer From Scratch
 > _Folder:_ `Transformer From Scratch`
 
-A complete, minimal Transformer implementation built entirely from scratch in Python. Great for learning internals and customizing behavior.
+An almost complete Transformer implementation built entirely from scratch in Python. Great for learning internals and customizing behavior.
 
 Modules include:
 - `decoder_block.py`: Transformer decoder architecture.
