@@ -4,12 +4,10 @@ import torch
 import sys
 import os
 
-# Add parent directory to sys.path for imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from transformer_arch import RoPE, LayerNorm, MultiHeadAttention, FeedForwardMLP, Config, DecoderBlock, Transformer
 
-# Configure logging once
 logging.basicConfig(
     level=logging.DEBUG,
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -23,7 +21,6 @@ logger = logging.getLogger(__name__)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 logger.info(f"Using device: {device}")
 
-# Set random seed for reproducibility
 torch.manual_seed(42)
 
 class TestRoPE(unittest.TestCase):
@@ -47,7 +44,6 @@ class TestRoPE(unittest.TestCase):
         self.assertEqual(cos.shape, (1, 1, T, self.head_dim // 2))
         self.assertTrue(torch.all(sin >= -1.0) and torch.all(sin <= 1.0))
         self.assertTrue(torch.all(cos >= -1.0) and torch.all(cos <= 1.0))
-        # Verify sin^2 + cos^2 = 1
         self.assertTrue(torch.allclose(sin**2 + cos**2, torch.ones_like(sin), atol=1e-6))
 
     def test_compute_sine_cosine_with_offset(self):
@@ -99,10 +95,8 @@ class TestLayerNorm(unittest.TestCase):
         x = torch.randn(B, T, self.d_model).to(device)
         output = self.layer_norm(x)
         self.assertEqual(output.shape, (B, T, self.d_model))
-        # Verify normalized mean is close to 0
         mean = output.mean(dim=-1, keepdim=True)
         self.assertTrue(torch.allclose(mean, torch.zeros_like(mean), atol=1e-5))
-        # Verify normalized variance is close to 1
         var = output.var(dim=-1, unbiased=False, keepdim=True)
         self.assertTrue(torch.allclose(var, torch.ones_like(var), atol=1e-5))
 
@@ -139,7 +133,6 @@ class TestMultiHeadAttention(unittest.TestCase):
         self.assertEqual(present_kv[1].shape, (B, self.num_heads, T, self.d_model // self.num_heads))
         self.assertFalse(torch.isinf(output).any())
         self.assertFalse(torch.isnan(output).any())
-        # Verify attention weights sum to 1
         self.assertTrue(torch.allclose(weights.sum(dim=-1), torch.ones(B, self.num_heads, T).to(device), atol=1e-5))
 
     def test_forward_with_kv_cache(self):
@@ -157,11 +150,10 @@ class TestMultiHeadAttention(unittest.TestCase):
         B, T = 2, 10
         x = torch.randn(B, T, self.d_model).to(device)
         padding_mask = torch.ones(B, T, dtype=torch.int, device=device)
-        padding_mask[:, -2:] = 0  # Mask last two positions
+        padding_mask[:, -2:] = 0 
         output, weights, _ = self.mha(x, padding_mask=padding_mask, causal=True)
         self.assertEqual(output.shape, (B, T, self.d_model))
         self.assertEqual(weights.shape, (B, self.num_heads, T, T))
-        # Verify masked positions have zero weight
         self.assertTrue(torch.all(weights[:, :, :, -2:] == 0))
 
     def test_forward_empty_sequence(self):
