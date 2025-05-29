@@ -148,9 +148,9 @@ with torch.no_grad():
     preds = outputs.argmax(dim=1) # Predicted classes
 
 # Convert list to arrays for accuracy
-y = np.array(preds.tolist())
-y_hat = np.array(labels.tolist())
+y_hat = np.array(preds.tolist()) # Predictions
+y = np.array(labels.tolist()) # Ground truth labels
 
 # Compute accuracy
-accuracy = np.mean(y == y_hat)
+accuracy = np.mean(y_hat == y)
 print(f"Accuracy: {accuracy * 100}%")
