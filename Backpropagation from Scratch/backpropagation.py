@@ -17,7 +17,7 @@ def gradient_descent(x, y, weights, biases, alpha):
     # Forward pass (Linear transformation)
     z = torch.matmul(x, weights) + biases
 
-    # Sigmoid activation (non-linear activation)
+    # Tanh activation (non-linear activation)
     a = tanh(z)
 
     # Compute loss function
