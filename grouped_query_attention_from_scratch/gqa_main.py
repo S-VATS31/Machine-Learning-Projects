@@ -36,6 +36,7 @@ class GroupedQueryAttention(torch.nn.Module):
         self.k_proj = torch.nn.Linear(d_model, self.head_dim * self.query_groups)
         self.v_proj = torch.nn.Linear(d_model, self.head_dim * self.query_groups)
         self.o_proj = torch.nn.Linear(d_model, d_model)
+        self.init_weights()
 
     def init_weights(self):
         """
