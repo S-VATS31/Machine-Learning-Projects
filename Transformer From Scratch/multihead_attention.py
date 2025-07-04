@@ -14,15 +14,6 @@ class MultiHeadAttention(torch.nn.Module):
             num_heads (int): Number of attention heads.
             dropout (float, optional): Dropout probability for attention weights and output.
                 Defaults to 0.1.
-
-        Attributes:
-            d_k (int): Dimensionality of each attention head (d_model // num_heads).
-            W_Q (torch.nn.Linear): Linear projection for queries.
-            W_K (torch.nn.Linear): Linear projection for keys.
-            W_V (torch.nn.Linear): Linear projection for values.
-            W_O (torch.nn.Linear): Linear projection for output.
-            rope (RoPE): Rotary Positional Embeddings layer.
-            dropout (torch.nn.Dropout): Dropout layer for regularization.
         """
         super(MultiHeadAttention, self).__init__()
         self.d_model = d_model
