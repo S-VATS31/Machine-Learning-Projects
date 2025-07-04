@@ -36,27 +36,6 @@ class GroupedQueryAttention(torch.nn.Module):
         self.k_proj = torch.nn.Linear(d_model, self.head_dim * self.query_groups)
         self.v_proj = torch.nn.Linear(d_model, self.head_dim * self.query_groups)
         self.o_proj = torch.nn.Linear(d_model, d_model)
-        self.init_weights()
-
-    def init_weights(self):
-        """
-        Initialize weights and biases for all linear layers.
-        """
-        # Query weight matrix
-        torch.nn.init.xavier_uniform_(self.q_proj.weight)
-        torch.nn.init.zeros_(self.q_proj.bias)
-
-        # Key weight matrix
-        torch.nn.init.xavier_uniform_(self.k_proj.weight)
-        torch.nn.init.zeros_(self.k_proj.bias)
-        
-        # Value weight matrix
-        torch.nn.init.xavier_uniform_(self.v_proj.weight)
-        torch.nn.init.zeros_(self.v_proj.bias)
-        
-        # Output weight matrix
-        torch.nn.init.xavier_uniform_(self.o_proj.weight)
-        torch.nn.init.zeros_(self.o_proj.bias)
 
     def forward(self, x: torch.Tensor):
         """
